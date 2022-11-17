@@ -68,12 +68,11 @@ class WebGLFrame {
         const fs = this.createShader(shaders[1], gl.FRAGMENT_SHADER);
         this.program = this.createProgram(vs, fs);
         // attribute 変数関係
-        this.attLocation = [
-          gl.getAttribLocation(this.program, "position"),
-          gl.getAttribLocation(this.program, "color"),
-          gl.getAttribLocation(this.program, "size"),
+        this.attLocation = [gl.getAttribLocation(this.program, "position")];
+        this.attStride = [
+          //vec3だから3
+          3,
         ];
-        this.attStride = [3, 4, 1, 1];
         // uniform 変数関係
         this.uniLocation = [
           gl.getUniformLocation(this.program, "globalColor"),
@@ -136,8 +135,6 @@ class WebGLFrame {
     // VBO の生成
     this.vbo = [
       this.createVbo(this.position),
-      this.createVbo(this.color),
-      this.createVbo(this.size),
     ];
     // 背景を何色でクリアするかを 0.0 ～ 1.0 の RGBA で指定する
     this.colorCodes = [];
